@@ -259,11 +259,7 @@ function Grid() {
         setAttempts(0)
         setWinningCases([])
     }
-console.log(winner)
-console.log(yourSelectedCase)
-console.log(comSelectedCase)
-console.log(caseChoices)
-console.log(howPlays)
+    
     const handleNewGame = () => {
         setHowPlays(true)
         setSelectedCase([])
@@ -304,7 +300,7 @@ console.log(howPlays)
             </div>
 
             <div className="button reset" onClick={() => handleReset()}>Reset</div>
-            <div className="button reset" onClick={() => handleNewGame()}>New Game</div>
+            <div className="button newGame" onClick={() => handleNewGame()}>New Game</div>
 
         </div>
     )
