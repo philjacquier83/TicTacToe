@@ -142,6 +142,16 @@
     border: 2px solid #264653;
     border-radius: 10px;
 
+    &--YouWin {
+        background: #2a9d8f;
+        color: white;
+    }
+
+    &--YouLose {
+        background: #9477a3;
+        color: white;
+    }
+
     .currentScore {
         font-size: 2vh;
     }
