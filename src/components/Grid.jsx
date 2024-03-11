@@ -294,9 +294,9 @@ function Grid() {
             </div>
 
             <div className="scoreboard">
-                <div className={`score ${(winner === 1 && howPlays) && "score--playing"}`}><span className="titleScore">YOU</span><span className="currentScore">{score1}</span></div>
+                <div className={`score ${(winner === 1 && howPlays) && "score--playing"}`}><span className="titleScore">YOU</span><span className={`currentScore ${winner === 2 && 'currentScore--You'}`}>{score1}</span></div>
                 <div className={`games ${winner === 2 ? 'games--YouWin' : winner === 3 && 'games--YouLose'}`}><span className="titleScore">Games : {games}</span><span className={`currentScore ${winner !== 1 && 'currentScore--result'}`}>{winner === 2 ? 'YOU WIN' : winner === 3 ? 'YOU LOSE' : winner === 4 ? 'DRAW' : '...'}</span></div>
-                <div className={`score ${(winner === 1 && !howPlays) && "score--playing"}`}><span className="titleScore">COMPUTER</span><span className="currentScore">{score2}</span></div>
+                <div className={`score ${(winner === 1 && !howPlays) && "score--playing"}`}><span className="titleScore">COMPUTER</span><span className={`currentScore ${winner === 3 && 'currentScore--Computer'}`}>{score2}</span></div>
             </div>
 
             <div className="button reset" onClick={() => handleReset()}>Reset</div>

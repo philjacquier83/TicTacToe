@@ -135,6 +135,10 @@
     &--result {
         animation: results 2s ease infinite;
     }
+
+    &--You, &--Computer {
+        animation: results 2s ease infinite;
+    }
 }
 
 .games {
