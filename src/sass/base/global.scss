@@ -17,6 +17,18 @@
     }
 }
 
+@keyframes winningCase {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .tictactoeGame {
     display: flex;
     flex-direction: column;
@@ -62,12 +74,6 @@
     &--selected:hover {
         opacity: 1;
     }
-}
-
-.winningCase {
-    transform: scale(1.05);
-    opacity: 1;
-    border: 2px dotted #2a9d8f;
 }
 
 .endOfGame {
@@ -164,6 +170,13 @@
     &--computer {
         color: #9477a3;
     }
+}
+
+.winningCase {
+    transform: scale(1.05);
+    opacity: 1;
+    border: 2px dotted #2a9d8f;
+    animation: winningCase 2s ease infinite;
 }
 
 h1 {
