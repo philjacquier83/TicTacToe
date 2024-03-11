@@ -1,0 +1,138 @@
+:root {
+    background-color: #264653;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tictactoeGame {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    height: 600px;
+    justify-content: center;
+    align-items: center;
+}
+
+.tictactoeGrid {
+    border: 1px solid #2a9d8f;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+}
+.case {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #2a9d8f;
+    margin: 2px;
+    font-size: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    background: #f6ecd8;
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+
+    &:hover {
+        transform: scale(1.05);
+        transition: transform 0.5s ease;
+    }
+}
+.winningCase {
+    transform: scale(1.05);
+    opacity: 1;
+    border: 2px dotted #2a9d8f;
+}
+
+.endOfGame {
+    font-size: 5vh;
+}
+
+.opacity {
+    opacity: 0.4;
+}
+
+.scoreboard {
+    width: 50vw;
+    min-width: 300px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    color: #2a9d8f;
+}
+
+.score {
+    height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f6ecd8;
+    border: 2px solid #264653;
+    border-radius: 10px;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+
+    &--playing {
+        transform: scale(1.1);
+        transition: transform 0.5s ease;
+    }
+}
+
+
+.titleScore {
+    display: flex;
+    flex: 2;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5vh;
+}
+
+.currentScore {
+    display: flex;
+    flex: 3;
+    align-items: center;
+    justify-content: center;
+    font-size: 3vh;
+    font-weight: 500;
+}
+
+.games {
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f6ecd8;
+    border: 2px solid #264653;
+    border-radius: 10px;
+
+    .currentScore {
+        font-size: 2vh;
+    }
+}
+
+.faIcon {
+    color: #2a9d8f;
+    filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.5));
+
+    &--computer {
+        color: #9477a3;
+    }
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+}
