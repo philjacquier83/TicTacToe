@@ -29,6 +29,27 @@
     }
 }
 
+@keyframes victoryDance {
+    0% {
+        transform: rotate(0);
+    }
+    50% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.tictactoeContainer {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .tictactoeGame {
     display: flex;
     flex-direction: column;
@@ -108,10 +129,20 @@
     transform: scale(1);
     transition: transform 0.5s ease;
 
-    &--playing {
-        transform: scale(1.1);
-        transition: transform 0.5s ease;
-        box-shadow: 2px 2px 6px #264653;
+    &--You.score--playing {
+            background: #2a9d8f;
+            color: white;
+            transform: scale(1.1);
+            transition: transform 0.5s ease;
+            box-shadow: 2px 2px 6px #264653;
+    }
+
+    &--Computer.score--playing {
+            background: #9477a3;
+            color: white;
+            transform: scale(1.1);
+            transition: transform 0.5s ease;
+            box-shadow: 2px 2px 6px #264653;
     }
 }
 
@@ -151,6 +182,7 @@
     background: #f6ecd8;
     border: 2px solid #264653;
     border-radius: 10px;
+    transition: background-color 2s ease;
 
     &--YouWin {
         background: #2a9d8f;
@@ -181,6 +213,10 @@
     opacity: 1;
     border: 2px dotted #2a9d8f;
     animation: winningCase 2s ease infinite;
+
+    .faIcon {
+        animation: victoryDance 4s ease infinite;
+    }
 }
 
 h1 {
@@ -196,5 +232,63 @@ h1 {
     &:hover {
         cursor: pointer;
         transform: scale(1.2);
+    }
+}
+
+.avatarsList {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 64px;
+}
+
+.faAvatar {
+    color: red;
+}
+
+.avatar {
+    width: 30px; 
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f6ecd8;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+
+    &--selected {
+        transform: scale(1.1);
+        border: 1px solid red;
+    }
+}
+
+.avatarsGrid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 50vw;
+}
+
+.avatarUser {
+    .avatar {
+        transform: scale(1);
+        transition: transform 0.5s ease;
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+    }
+
+    .faAvatar {
+        color: #2a9d8f;
+    }
+}
+
+.avatarComputer {
+    .faAvatar {
+        color: #9477a3;
     }
 }
