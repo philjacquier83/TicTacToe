@@ -7,14 +7,7 @@ import Avatars from './Avatars'
 
 function Grid() {
 
-    const winningCombo1 = [1,2,3]
-    const winningCombo2 = [4,5,6]
-    const winningCombo3 = [7,8,9]
-    const winningCombo4 = [1,4,7]
-    const winningCombo5 = [2,5,8]
-    const winningCombo6 = [3,6,9]
-    const winningCombo7 = [1,5,9]
-    const winningCombo8 = [3,5,7]
+    const winningCombos = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
     
     const [ attempts, setAttempts ] = useState(0)
     const [ caseChoices, setCaseChoices ] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -26,7 +19,6 @@ function Grid() {
     const [ games, setGames ] = useState(1)
     const [ score1, setScore1 ] = useState(0)
     const [ score2, setScore2 ] = useState(0)
-console.log(howPlays)
     const [ winner, setWinner ] = useState(1)
     const [ yourAvatar, setYourAvatar ] = useState(0)
     const [ comAvatar, setComAvatar ] = useState(1)
@@ -37,203 +29,55 @@ console.log(howPlays)
         setYourSelectedCase(prevYou => [...prevYou, numCase])
         setCaseChoices(caseChoices.filter(item => item !== numCase))
         setAttempts(prevAtt => prevAtt + 1)
-        if(attempts !== 8) {
-            setHowPlays(!howPlays)
-        }
+        setHowPlays(!howPlays)
     }
 
     if(winner === 1) {
-        if(winningCombo1.every(value => yourSelectedCase.includes(value)) ||
-            winningCombo2.every(value => yourSelectedCase.includes(value)) ||
-            winningCombo3.every(value => yourSelectedCase.includes(value)) ||
-            winningCombo4.every(value => yourSelectedCase.includes(value)) ||
-            winningCombo5.every(value => yourSelectedCase.includes(value)) ||
-            winningCombo6.every(value => yourSelectedCase.includes(value)) ||
-            winningCombo7.every(value => yourSelectedCase.includes(value)) ||
-            winningCombo8.every(value => yourSelectedCase.includes(value))) {
-            setWinner(2)
-            if([1,2,3].every(element => yourSelectedCase.includes(element))) { setWinningCases([1,2,3]) }
-            else if([4,5,6].every(element => yourSelectedCase.includes(element))) { setWinningCases([4,5,6]) }
-            else if([7,8,9].every(element => yourSelectedCase.includes(element))) { setWinningCases([7,8,9]) }
-            else if([1,4,7].every(element => yourSelectedCase.includes(element))) { setWinningCases([1,4,7]) }
-            else if([2,5,8].every(element => yourSelectedCase.includes(element))) { setWinningCases([2,5,8]) }
-            else if([3,6,9].every(element => yourSelectedCase.includes(element))) { setWinningCases([3,6,9]) }
-            else if([1,5,9].every(element => yourSelectedCase.includes(element))) { setWinningCases([1,5,9]) }
-            else if([3,5,7].every(element => yourSelectedCase.includes(element))) { setWinningCases([3,5,7]) }
-            setScore1(prev => prev + 1)
-        } else if(winningCombo1.every(value => comSelectedCase.includes(value)) ||
-            winningCombo2.every(value => comSelectedCase.includes(value)) ||
-            winningCombo3.every(value => comSelectedCase.includes(value)) ||
-            winningCombo4.every(value => comSelectedCase.includes(value)) ||
-            winningCombo5.every(value => comSelectedCase.includes(value)) ||
-            winningCombo6.every(value => comSelectedCase.includes(value)) ||
-            winningCombo7.every(value => comSelectedCase.includes(value)) ||
-            winningCombo8.every(value => comSelectedCase.includes(value))) {
-            setWinner(3)
-            if([1,2,3].every(element => comSelectedCase.includes(element))) { setWinningCases([1,2,3]) }
-            else if([4,5,6].every(element => comSelectedCase.includes(element))) { setWinningCases([4,5,6]) }
-            else if([7,8,9].every(element => comSelectedCase.includes(element))) { setWinningCases([7,8,9]) }
-            else if([1,4,7].every(element => comSelectedCase.includes(element))) { setWinningCases([1,4,7]) }
-            else if([2,5,8].every(element => comSelectedCase.includes(element))) { setWinningCases([2,5,8]) }
-            else if([3,6,9].every(element => comSelectedCase.includes(element))) { setWinningCases([3,6,9]) }
-            else if([1,5,9].every(element => comSelectedCase.includes(element))) { setWinningCases([1,5,9]) }
-            else if([3,5,7].every(element => comSelectedCase.includes(element))) { setWinningCases([3,5,7]) }
-            setScore2(prev => prev + 1)
-        } else {
-            if(attempts === 9) {
-                setWinner(4)
+        winningCombos.forEach(winningCombo => {
+            if(winningCombo.every(value => yourSelectedCase.includes(value))) { 
+                setWinner(2)
+                setWinningCases(winningCombo)
+                setScore1(prev => prev + 1)
+            } else if(winningCombo.every(value => comSelectedCase.includes(value))) { 
+                setWinner(3)
+                setWinningCases(winningCombo)
+                setScore2(prev => prev + 1)
+            } else {
+                if(attempts === 9) {
+                    setWinner(4)
+                }
             }
-        }
+        })
     }   
 
     let comChoice;
-    
-    if(([2,3].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(1) !== -1) {
-        comChoice = 1
-    } else if(([4,7].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(1) !== -1) {
-        comChoice = 1
-    } else if(([5,9].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(1) !== -1) {
-        comChoice = 1
-    } else if(([1,3].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(2) !== -1) {
-        comChoice = 2
-    } else if(([5,8].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(2) !== -1) {
-        comChoice = 2
-    } else if(([1,2].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(3) !== -1) {
-        comChoice = 3
-    } else if(([6,9].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(3) !== -1) {
-        comChoice = 3
-    } else if(([5,7].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(3) !== -1) {
-        comChoice = 3
-    } else if(([1,7].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(4) !== -1) {
-        comChoice = 4
-    } else if(([5,6].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(4) !== -1) {
-        comChoice = 4
-    } else if(([1,9].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(5) !== -1) {
-        comChoice = 5
-    } else if(([2,8].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(5) !== -1) {
-        comChoice = 5
-    } else if(([3,7].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(5) !== -1) {
-        comChoice = 5
-    } else if(([4,6].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(5) !== -1) {
-        comChoice = 5
-    } else if(([3,9].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(6) !== -1) {
-        comChoice = 6
-    } else if(([4,5].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(6) !== -1) {
-        comChoice = 6
-    } else if(([1,4].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(7) !== -1) {
-        comChoice = 7
-    } else if(([3,5].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(7) !== -1) {
-        comChoice = 7
-    } else if(([8,9].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(7) !== -1) {
-        comChoice = 7
-    } else if(([2,5].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(8) !== -1) {
-        comChoice = 8
-    } else if(([7,9].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(8) !== -1) {
-        comChoice = 8
-    } else if(([3,6].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(9) !== -1) {
-        comChoice = 9
-    } else if(([1,5].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(9) !== -1) {
-        comChoice = 9
-    } else if(([7,8].every(element => comSelectedCase.includes(element))) && 
-        caseChoices.indexOf(9) !== -1) {
-        comChoice = 9
-    } else if([2,3].every(element => yourSelectedCase.includes(element)) && 
-        caseChoices.indexOf(1) !== -1) {
-        comChoice = 1
-    } else if([4,7].every(element => yourSelectedCase.includes(element)) && 
-        caseChoices.indexOf(1) !== -1) {
-        comChoice = 1
-    } else if([5,9].every(element => yourSelectedCase.includes(element)) && 
-        caseChoices.indexOf(1) !== -1) {
-        comChoice = 1
-    } else if(([1,3].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(2) !== -1) {
-        comChoice = 2
-    } else if(([5,8].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(2) !== -1) {
-        comChoice = 2
-    } else if([1,2].every(element => yourSelectedCase.includes(element)) && 
-        caseChoices.indexOf(3) !== -1) {
-        comChoice = 3
-    } else if(([6,9].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(3) !== -1) {
-        comChoice = 3
-    } else if(([5,7].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(3) !== -1) {
-        comChoice = 3
-    } else if(([1,7].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(4) !== -1) {
-        comChoice = 4
-    } else if(([5,6].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(4) !== -1) {
-        comChoice = 4
-    } else if(([1,9].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(5) !== -1) {
-        comChoice = 5
-    } else if(([2,8].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(5) !== -1) {
-        comChoice = 5
-    } else if(([3,7].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(5) !== -1) {
-        comChoice = 5
-    } else if(([4,6].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(5) !== -1) {
-        comChoice = 5
-    } else if(([3,9].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(6) !== -1) {
-        comChoice = 6
-    } else if(([4,5].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(6) !== -1) {
-        comChoice = 6
-    } else if(([1,4].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(7) !== -1) {
-        comChoice = 7
-    } else if(([3,5].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(7) !== -1) {
-        comChoice = 7
-    } else if(([8,9].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(7) !== -1) {
-        comChoice = 7
-    } else if(([2,5].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(8) !== -1) {
-        comChoice = 8
-    } else if(([7,9].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(8) !== -1) {
-        comChoice = 8
-    } else if(([3,6].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(9) !== -1) {
-        comChoice = 9
-    } else if(([1,5].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(9) !== -1) {
-        comChoice = 9
-    } else if(([7,8].every(element => yourSelectedCase.includes(element))) && 
-        caseChoices.indexOf(9) !== -1) {
-        comChoice = 9
-    } else {
-        comChoice = caseChoices[Math.floor(Math.random() * caseChoices.length)]
+    let potentialChoice;
+
+    const warningCombos = [{combo: [2,3], caseToPlay: 1}, {combo: [4,7], caseToPlay: 1}, {combo: [5,9], caseToPlay: 1}, 
+                            {combo: [1,3], caseToPlay: 2}, {combo: [5,8], caseToPlay: 2}, 
+                            {combo: [1,2], caseToPlay: 3}, {combo: [6,9], caseToPlay: 3}, {combo: [5,7], caseToPlay: 3}, 
+                            {combo: [1,7], caseToPlay: 4}, {combo: [5,6], caseToPlay: 4}, 
+                            {combo: [1,9], caseToPlay: 5}, {combo: [2,8], caseToPlay: 5}, {combo: [3,7], caseToPlay: 5}, {combo: [4,6], caseToPlay: 5}, 
+                            {combo: [3,9], caseToPlay: 6}, {combo: [4,5], caseToPlay: 6}, 
+                            {combo: [1,4], caseToPlay: 7}, {combo: [3,5], caseToPlay: 7}, {combo: [8,9], caseToPlay: 7}, 
+                            {combo: [2,5], caseToPlay: 8}, {combo: [7,9], caseToPlay: 8}, 
+                            {combo: [3,6], caseToPlay: 9}, {combo: [1,5], caseToPlay: 9}, {combo: [7,8], caseToPlay: 9}]
+
+    if(!howPlays) {
+        warningCombos.forEach((warningCombo) => {
+            if((warningCombo.combo.every(element => comSelectedCase.includes(element))) && caseChoices.indexOf(warningCombo.caseToPlay) !== -1) {
+                potentialChoice = warningCombo.caseToPlay
+            } else if((warningCombo.combo.every(element => yourSelectedCase.includes(element))) && caseChoices.indexOf(warningCombo.caseToPlay) !== -1) {
+                potentialChoice = warningCombo.caseToPlay
+            }
+        })
+        
+        if(potentialChoice !== undefined) {
+            comChoice = potentialChoice
+        } else {
+            comChoice = caseChoices[Math.floor(Math.random() * caseChoices.length)]
+        }
+        
     }
 
     useEffect(() => {
