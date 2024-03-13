@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faStar, faCloud, faSun, faCloudBolt, faMoon, faSnowflake, faFaceSmile, faFaceAngry, faHippo, faSpider, faFrog, faDove, faMosquito, faCat, faDog, faDragon } from "@fortawesome/free-solid-svg-icons"
+import { faStar, faCloud, faSun, faCloudBolt, faMoon, faSnowflake, faFaceSmile, faFaceAngry, faHippo, faSpider, faFrog, faDove, faMosquito, faCat, faDog, faDragon,
+        faSkull, faPaw, faGuitar, faHeart, faHorseHead, faHatCowboy, faGun, faBone, faFaceKissWinkHeart, faCandyCane, faFish, faBug, faBurger, faTrophy } from "@fortawesome/free-solid-svg-icons"
 import '../sass/main.scss'
 import { useState } from "react"
 

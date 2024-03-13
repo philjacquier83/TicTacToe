@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import '../sass/main.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, faCloud, faCat, faDog, faHippo, faSpider, faFrog, faDove, faMosquito, faDragon, faSun, faCloudBolt, faMoon, faSnowflake, faFaceSmile, faFaceAngry } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faCloud, faCat, faDog, faHippo, faSpider, faFrog, faDove, faMosquito, faDragon, faSun, faCloudBolt, faMoon, faSnowflake, faFaceSmile, faFaceAngry,
+    faSkull, faPaw, faGuitar, faHeart, faHorseHead, faHatCowboy, faGun, faBone, faFaceKissWinkHeart, faCandyCane, faFish, faBug, faBurger, faTrophy } from '@fortawesome/free-solid-svg-icons'
 import Avatars from './Avatars'
 
 function Grid() {
@@ -275,7 +276,8 @@ console.log(howPlays)
         setWinner(1)
     }
 
-    const avatars = [faStar, faCloud, faSun, faCloudBolt, faMoon, faSnowflake, faFaceSmile, faFaceAngry, faHippo, faSpider, faFrog, faDove, faMosquito, faCat, faDog, faDragon]
+    const avatars = [faStar, faCloud, faSun, faCloudBolt, faMoon, faSnowflake, faFaceSmile, faFaceAngry, faFaceKissWinkHeart, faHeart, faHippo, faSpider, faFrog, faDove, faMosquito, faCat, faDragon, faHorseHead,
+        faFish, faBug, faDog, faBone, faPaw, faCandyCane, faBurger, faGuitar, faTrophy, faHatCowboy, faGun, faSkull]
     
     const handleOpenAvatars = () => {
         setOpenAvatars(!openAvatars)
@@ -341,7 +343,7 @@ console.log(howPlays)
                 </div>
 
                 <div className='actions'>
-                    <div className="button changeAvatar" onClick={handleOpenAvatars}>Change your Avatar</div>
+                    <div className="button changeAvatar" onClick={handleOpenAvatars}>Change Avatar</div>
                     <div className="button reset" onClick={() => handleReset()}>Reset</div>
                     <div className="button newGame" onClick={() => handleNewGame()}>New Game</div>
                 </div>
