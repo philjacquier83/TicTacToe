@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import '../sass/main.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, faCloud } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faCloud, faCat, faDog, faHippo, faSpider, faFrog, faDove, faMosquito, faDragon, faSun, faCloudBolt, faMoon, faSnowflake, faFaceSmile, faFaceAngry } from '@fortawesome/free-solid-svg-icons'
 import Avatars from './Avatars'
 
 function Grid() {
@@ -27,6 +27,9 @@ function Grid() {
     const [ score2, setScore2 ] = useState(0)
 console.log(howPlays)
     const [ winner, setWinner ] = useState(1)
+    const [ yourAvatar, setYourAvatar ] = useState(0)
+    const [ comAvatar, setComAvatar ] = useState(1)
+    const [ openAvatars, setOpenAvatars ] = useState(true)
 
     const handleCase = (numCase) => {
         setSelectedCase(prev => [...prev, numCase])
@@ -271,45 +274,79 @@ console.log(howPlays)
         setHowPlays(howPlays)
         setWinner(1)
     }
+
+    const avatars = [faStar, faCloud, faSun, faCloudBolt, faMoon, faSnowflake, faFaceSmile, faFaceAngry, faHippo, faSpider, faFrog, faDove, faMosquito, faCat, faDog, faDragon]
+    
+    const handleOpenAvatars = () => {
+        setOpenAvatars(!openAvatars)
+    }
+
+    const handleSelectAvatar = (avatarId) => {
+        setYourAvatar(avatarId)
+        setComAvatar((Math.floor(Math.random() * avatars.length)))
+    }
     
     return (
 
         <div className="tictactoeGame">
-            <div className="avatarsGrid">
+            
+            {openAvatars ? 
                 
-                {/* <Avatars player='user' /> */}
-
-                <div className="tictactoeGrid">
-                    <div className="line">
-                        <div className={`case ${selectedCase.indexOf(1) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(1) !== -1 ? 'winningCase' : 'opacity')}`} id="case1" onClick={(selectedCase.indexOf(1) === -1 && winner === 1 && howPlays) ? () => handleCase(1) : null}>{yourSelectedCase.includes(1) ? <FontAwesomeIcon icon={faStar} className='faIcon' /> : comSelectedCase.includes(1) ? <FontAwesomeIcon icon={faCloud} className='faIcon faIcon--computer' /> : ''}</div>
-                        <div className={`case ${selectedCase.indexOf(2) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(2) !== -1 ? 'winningCase' : 'opacity')}`} id="case2" onClick={(selectedCase.indexOf(2) === -1 && winner === 1 && howPlays) ? () => handleCase(2) : null}>{yourSelectedCase.includes(2) ? <FontAwesomeIcon icon={faStar} className='faIcon' /> : comSelectedCase.includes(2) ? <FontAwesomeIcon icon={faCloud} className='faIcon faIcon--computer' /> : ''}</div>
-                        <div className={`case ${selectedCase.indexOf(3) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(3) !== -1 ? 'winningCase' : 'opacity')}`} id="case3" onClick={(selectedCase.indexOf(3) === -1 && winner === 1 && howPlays) ? () => handleCase(3) : null}>{yourSelectedCase.includes(3) ? <FontAwesomeIcon icon={faStar} className='faIcon' /> : comSelectedCase.includes(3) ? <FontAwesomeIcon icon={faCloud} className='faIcon faIcon--computer' /> : ''}</div>
+                <>
+                <div className="avatars">
+                    <p>Select your Avatar</p>
+                    <div className="selectAvatar">
+                        {avatars.map((avatar, id) =>
+                            <div className={`avatar ${yourAvatar === id && 'avatar--selected'}`} key={`${avatar}-${id}`} onClick={() => handleSelectAvatar(id)}><FontAwesomeIcon icon={avatar} className="faIcon" /></div>
+                        )}
                     </div>
-                    <div className="line">
-                        <div className={`case ${selectedCase.indexOf(4) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(4) !== -1 ? 'winningCase' : 'opacity')}`} id="case4" onClick={(selectedCase.indexOf(4) === -1 && winner === 1 && howPlays) ? () => handleCase(4) : null}>{yourSelectedCase.includes(4) ? <FontAwesomeIcon icon={faStar} className='faIcon' /> : comSelectedCase.includes(4) ? <FontAwesomeIcon icon={faCloud} className='faIcon faIcon--computer' /> : ''}</div>
-                        <div className={`case ${selectedCase.indexOf(5) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(5) !== -1 ? 'winningCase' : 'opacity')}`} id="case5" onClick={(selectedCase.indexOf(5) === -1 && winner === 1 && howPlays) ? () => handleCase(5) : null}>{yourSelectedCase.includes(5) ? <FontAwesomeIcon icon={faStar} className='faIcon' /> : comSelectedCase.includes(5) ? <FontAwesomeIcon icon={faCloud} className='faIcon faIcon--computer' /> : ''}</div>
-                        <div className={`case ${selectedCase.indexOf(6) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(6) !== -1 ? 'winningCase' : 'opacity')}`} id="case6" onClick={(selectedCase.indexOf(6) === -1 && winner === 1 && howPlays) ? () => handleCase(6) : null}>{yourSelectedCase.includes(6) ? <FontAwesomeIcon icon={faStar} className='faIcon' /> : comSelectedCase.includes(6) ? <FontAwesomeIcon icon={faCloud} className='faIcon faIcon--computer' /> : ''}</div>
-                    </div>
-                    <div className="line">
-                        <div className={`case ${selectedCase.indexOf(7) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(7) !== -1 ? 'winningCase' : 'opacity')}`} id="case7" onClick={(selectedCase.indexOf(7) === -1 && winner === 1 && howPlays) ? () => handleCase(7) : null}>{yourSelectedCase.includes(7) ? <FontAwesomeIcon icon={faStar} className='faIcon' /> : comSelectedCase.includes(7) ? <FontAwesomeIcon icon={faCloud} className='faIcon faIcon--computer' /> : ''}</div>
-                        <div className={`case ${selectedCase.indexOf(8) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(8) !== -1 ? 'winningCase' : 'opacity')}`} id="case8" onClick={(selectedCase.indexOf(8) === -1 && winner === 1 && howPlays) ? () => handleCase(8) : null}>{yourSelectedCase.includes(8) ? <FontAwesomeIcon icon={faStar} className='faIcon' /> : comSelectedCase.includes(8) ? <FontAwesomeIcon icon={faCloud} className='faIcon faIcon--computer' /> : ''}</div>
-                        <div className={`case ${selectedCase.indexOf(9) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(9) !== -1 ? 'winningCase' : 'opacity')}`} id="case9" onClick={(selectedCase.indexOf(9) === -1 && winner === 1 && howPlays) ? () => handleCase(9) : null}>{yourSelectedCase.includes(9) ? <FontAwesomeIcon icon={faStar} className='faIcon' /> : comSelectedCase.includes(9) ? <FontAwesomeIcon icon={faCloud} className='faIcon faIcon--computer' /> : ''}</div>
-                    </div>                
                 </div>
 
-                {/* <Avatars player='computer' /> */}
+                <div>
+                    <div className="button validation" onClick={handleOpenAvatars}>OK</div>
+                </div>
+                </>
 
-            </div>
-            
-            <div className="scoreboard">
-                <div className={`score score--You ${(winner === 1 && howPlays) && "score--playing"}`}><span className="titleScore">YOU</span><span className={`currentScore ${winner === 2 && 'currentScore--You'}`}>{score1}</span></div>
-                <div className={`games ${winner === 2 ? 'games--YouWin' : winner === 3 && 'games--YouLose'}`}><span className="titleScore">Games : {games}</span><span className={`currentScore ${winner !== 1 && 'currentScore--result'}`}>{winner === 2 ? 'YOU WIN' : winner === 3 ? 'YOU LOSE' : winner === 4 ? 'DRAW' : '...'}</span></div>
-                <div className={`score score--Computer ${(winner === 1 && !howPlays) && "score--playing"}`}><span className="titleScore">COMPUTER</span><span className={`currentScore ${winner === 3 && 'currentScore--Computer'}`}>{score2}</span></div>
-            </div>
+                :
 
-            <div className="button reset" onClick={() => handleReset()}>Reset</div>
-            <div className="button newGame" onClick={() => handleNewGame()}>New Game</div>
-            <div style={{ width: '20px', height: '20px', background: 'red'}}><div style={{width: '10px', height: '10px', borderRadius: '50%', background: 'blue'}}></div></div>
+                <>
+                
+                
+                <div className="scoreboard">
+                    <div className={`score score--You ${(winner === 1 && howPlays) && "score--playing"}`}><span className="titleScore">YOU</span><span className={`currentScore ${winner === 2 && 'currentScore--You'}`}>{score1}</span></div>
+                    <div className={`games ${winner === 2 ? 'games--YouWin' : winner === 3 && 'games--YouLose'}`}><span className="titleScore">Games : {games}</span><span className={`currentScore ${winner !== 1 && 'currentScore--result'}`}>{winner === 2 ? 'YOU WIN' : winner === 3 ? 'YOU LOSE' : winner === 4 ? 'DRAW' : '...'}</span></div>
+                    <div className={`score score--Computer ${(winner === 1 && !howPlays) && "score--playing"}`}><span className="titleScore">COMPUTER</span><span className={`currentScore ${winner === 3 && 'currentScore--Computer'}`}>{score2}</span></div>
+                </div>
+                
+                <div className="Grid">
+                    
+                    <div className="tictactoeGrid">
+                        <div className="line">
+                            <div className={`case ${selectedCase.indexOf(1) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(1) !== -1 ? 'winningCase' : 'opacity')}`} id="case1" onClick={(selectedCase.indexOf(1) === -1 && winner === 1 && howPlays) ? () => handleCase(1) : null}>{yourSelectedCase.includes(1) ? <FontAwesomeIcon icon={avatars[yourAvatar]} className='faIcon' /> : comSelectedCase.includes(1) ? <FontAwesomeIcon icon={avatars[comAvatar]} className='faIcon faIcon--computer' /> : ''}</div>
+                            <div className={`case ${selectedCase.indexOf(2) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(2) !== -1 ? 'winningCase' : 'opacity')}`} id="case2" onClick={(selectedCase.indexOf(2) === -1 && winner === 1 && howPlays) ? () => handleCase(2) : null}>{yourSelectedCase.includes(2) ? <FontAwesomeIcon icon={avatars[yourAvatar]} className='faIcon' /> : comSelectedCase.includes(2) ? <FontAwesomeIcon icon={avatars[comAvatar]} className='faIcon faIcon--computer' /> : ''}</div>
+                            <div className={`case ${selectedCase.indexOf(3) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(3) !== -1 ? 'winningCase' : 'opacity')}`} id="case3" onClick={(selectedCase.indexOf(3) === -1 && winner === 1 && howPlays) ? () => handleCase(3) : null}>{yourSelectedCase.includes(3) ? <FontAwesomeIcon icon={avatars[yourAvatar]} className='faIcon' /> : comSelectedCase.includes(3) ? <FontAwesomeIcon icon={avatars[comAvatar]} className='faIcon faIcon--computer' /> : ''}</div>
+                        </div>
+                        <div className="line">
+                            <div className={`case ${selectedCase.indexOf(4) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(4) !== -1 ? 'winningCase' : 'opacity')}`} id="case4" onClick={(selectedCase.indexOf(4) === -1 && winner === 1 && howPlays) ? () => handleCase(4) : null}>{yourSelectedCase.includes(4) ? <FontAwesomeIcon icon={avatars[yourAvatar]} className='faIcon' /> : comSelectedCase.includes(4) ? <FontAwesomeIcon icon={avatars[comAvatar]} className='faIcon faIcon--computer' /> : ''}</div>
+                            <div className={`case ${selectedCase.indexOf(5) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(5) !== -1 ? 'winningCase' : 'opacity')}`} id="case5" onClick={(selectedCase.indexOf(5) === -1 && winner === 1 && howPlays) ? () => handleCase(5) : null}>{yourSelectedCase.includes(5) ? <FontAwesomeIcon icon={avatars[yourAvatar]} className='faIcon' /> : comSelectedCase.includes(5) ? <FontAwesomeIcon icon={avatars[comAvatar]} className='faIcon faIcon--computer' /> : ''}</div>
+                            <div className={`case ${selectedCase.indexOf(6) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(6) !== -1 ? 'winningCase' : 'opacity')}`} id="case6" onClick={(selectedCase.indexOf(6) === -1 && winner === 1 && howPlays) ? () => handleCase(6) : null}>{yourSelectedCase.includes(6) ? <FontAwesomeIcon icon={avatars[yourAvatar]} className='faIcon' /> : comSelectedCase.includes(6) ? <FontAwesomeIcon icon={avatars[comAvatar]} className='faIcon faIcon--computer' /> : ''}</div>
+                        </div>
+                        <div className="line">
+                            <div className={`case ${selectedCase.indexOf(7) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(7) !== -1 ? 'winningCase' : 'opacity')}`} id="case7" onClick={(selectedCase.indexOf(7) === -1 && winner === 1 && howPlays) ? () => handleCase(7) : null}>{yourSelectedCase.includes(7) ? <FontAwesomeIcon icon={avatars[yourAvatar]} className='faIcon' /> : comSelectedCase.includes(7) ? <FontAwesomeIcon icon={avatars[comAvatar]} className='faIcon faIcon--computer' /> : ''}</div>
+                            <div className={`case ${selectedCase.indexOf(8) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(8) !== -1 ? 'winningCase' : 'opacity')}`} id="case8" onClick={(selectedCase.indexOf(8) === -1 && winner === 1 && howPlays) ? () => handleCase(8) : null}>{yourSelectedCase.includes(8) ? <FontAwesomeIcon icon={avatars[yourAvatar]} className='faIcon' /> : comSelectedCase.includes(8) ? <FontAwesomeIcon icon={avatars[comAvatar]} className='faIcon faIcon--computer' /> : ''}</div>
+                            <div className={`case ${selectedCase.indexOf(9) !== -1 && 'case--selected'} ${winner !== 1 && (winningCases.indexOf(9) !== -1 ? 'winningCase' : 'opacity')}`} id="case9" onClick={(selectedCase.indexOf(9) === -1 && winner === 1 && howPlays) ? () => handleCase(9) : null}>{yourSelectedCase.includes(9) ? <FontAwesomeIcon icon={avatars[yourAvatar]} className='faIcon' /> : comSelectedCase.includes(9) ? <FontAwesomeIcon icon={avatars[comAvatar]} className='faIcon faIcon--computer' /> : ''}</div>
+                        </div>                
+                    </div>
+
+                </div>
+
+                <div className='actions'>
+                    <div className="button changeAvatar" onClick={handleOpenAvatars}>Change your Avatar</div>
+                    <div className="button reset" onClick={() => handleReset()}>Reset</div>
+                    <div className="button newGame" onClick={() => handleNewGame()}>New Game</div>
+                </div>
+                </>
+        }
         </div>
     )
 }

@@ -5,76 +5,19 @@ import { useState } from "react"
 
 function Avatars({ player }) {
 
-    const [ avatarUser, setAvatarUser ] = useState('faStar')
-    const [ avatarComputer, setAvatarComputer ] = useState('faCloud')
-
+    const [ avatarUser, setAvatarUser ] = useState(0)
+    const [ avatarComputer, setAvatarComputer ] = useState(1)
+    const avatars = [faStar, faCloud, faSun, faCloudBolt, faMoon, faSnowflake, faFaceSmile, faFaceAngry, faHippo, faSpider, faFrog, faDove, faMosquito, faCat, faDog, faDragon]
+    
     return (
 
         <>
             <div className={`avatarsList ${player === 'user' ? 'avatarUser' : 'avatarComputer'}`}>
+                {avatars.map((avatar, index) => 
                 <div className={`avatar ${((player === 'user' && avatarUser === 'faStar') || (player === 'computer' && avatarComputer === 'faStar')) && 'avatar--selected'}`}>
-                    <FontAwesomeIcon icon={faStar} className="faAvatar" />
+                    <FontAwesomeIcon icon={avatar} className="faAvatar" />
                 </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faCloud} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faSun} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faCloudBolt} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faMoon} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faSnowflake} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faFaceSmile} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faFaceAngry} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faHippo} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faSpider} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faFrog} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faDove} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faMosquito} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faCat} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faDog} className="faAvatar" />
-                </div>
-
-                <div className="avatar">
-                    <FontAwesomeIcon icon={faDragon} className="faAvatar" />
-                </div>
+                )}
                 
             </div>
         </>
